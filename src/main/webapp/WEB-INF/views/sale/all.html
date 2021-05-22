@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>All sales list</title>
+    <style type="text/css">
+        body {
+            padding: 20px;
+        }
+
+        .sale, .sale td {
+            border: 1px solid lightgray;
+            padding: 7px;
+        }
+    </style>
+</head>
+<body>
+<table class="sale">
+    <thead>
+    <tr>
+        <th>Идентификатор</th>
+        <th>Изображение</th>
+        <th>Название</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="saleDTO : ${saleDTOList}">
+        <td th:text="${saleDTO.id}">1</td>
+        <td>
+            <img th:attr="src=@{'data:image/png;base64,'+ ${saleDTO.image}}" alt="avatar" height="150" width="150"/>
+        </td>
+        <td th:text="${saleDTO.title}">title</td>
+        <td>
+            <form id="view-form" th:method="GET" th:action="@{/sale/{id}(id=${saleDTO.id})}">
+                <input type="submit" value="Отобразить"/>
+            </form>
+        </td>
+        <td>
+            <form id="edit-form" th:method="GET" th:action="@{/sale/edit/{id}(id=${saleDTO.id})}">
+                <input type="submit" value="Редактировать"/>
+            </form>
+        </td>
+        <td>
+            <form id="delete-form" th:method="DELETE" th:action="@{/sale/delete(id=${saleDTO.id})}">
+                <input type="submit" value="Удалить"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/sale/new}">Добавить</a>
+</body>
+</html>

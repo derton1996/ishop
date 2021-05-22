@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create product</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .menu, .menu td {
+            border: 1px solid lightgray;
+            padding: 7px;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>
+            <form id="catalog-form" th:method="GET" th:action="@{/product}">
+                <input type="submit" value="Каталог"/>
+            </form>
+        </th>
+        <th>
+            <form id="sale-form" th:method="GET" th:action="@{/sale}">
+                <input type="submit" value="Акции"/>
+            </form>
+        </th>
+    </tr>
+    </thead>
+</table>
+</body>
+
+</html>

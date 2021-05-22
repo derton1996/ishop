@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>All products list</title>
+    <style type="text/css">
+        body {
+            padding: 20px;
+        }
+
+        .product, .product td {
+            border: 1px solid lightgray;
+            padding: 7px;
+        }
+    </style>
+</head>
+<body>
+<table class="product">
+    <thead>
+    <tr>
+        <th>Идентификатор</th>
+        <th>Калибр</th>
+        <th>Страна производства</th>
+        <th>Описание</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="productDTO : ${productDTOList}">
+        <td th:text="${productDTO.id}">1</td>
+        <td th:text="${productDTO.gauge}">10-40</td>
+        <td th:text="${productDTO.countryOrigin}">Германия</td>
+        <td th:text="${productDTO.description}">описание</td>
+        <td>
+            <form id="view-form" th:method="GET" th:action="@{/product/{id}(id=${productDTO.id})}">
+                <input type="submit" value="Отобразить"/>
+            </form>
+        </td>
+        <td>
+            <form id="edit-form" th:method="GET" th:action="@{/product/edit/{id}(id=${productDTO.id})}">
+                <input type="submit" value="Редактировать"/>
+            </form>
+        </td>
+        <td>
+            <form id="delete-form" th:method="DELETE" th:action="@{/product/delete(id=${productDTO.id})}">
+                <input type="submit" value="Удалить"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/product/new}">Добавить</a>
+</body>
+</html>

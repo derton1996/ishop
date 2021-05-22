@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create sale</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<form id="view-form" th:object="${saleDTO}">
+    <h1>sale info:</h1>
+
+    <div class="row">
+        <label for="id-input">Идентификатор:</label>
+        <input id="id-input" type="text" th:field="*{id}"/>
+    </div>
+    <div class="row">
+        <label for="title-input">Название:</label>
+        <input id="title-input" type="text" th:field="*{title}"/>
+    </div>
+    <div class="row">
+        <label for="description-input">Описание:</label>
+        <input id="description-input" type="text" th:field="*{description}"/>
+    </div>
+    <div>
+        <img th:attr="src=@{'data:image/png;base64,'+ ${saleDTO.image}}" alt="avatar" height="150" width="150"/>
+    </div>
+</form>
+</body>
+</html>

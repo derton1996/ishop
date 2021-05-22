@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit product</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<form id="edit-form" th:method="PATCH" th:action="@{/product/edit}" th:object="${productDTO}">
+
+    <h1>Product info:</h1>
+
+    <div class="row">
+        <label for="id-input">Идентификатор:</label>
+        <input id="id-input" type="text" readonly="readonly" th:field="*{id}"/>
+    </div>
+    <div class="row">
+        <label for="gauge-input">Калибр:</label>
+        <input id="gauge-input" type="text" th:field="*{gauge}"/>
+    </div>
+    <div class="row">
+        <label for="countryOrigin-input">Страна производства:</label>
+        <input id="countryOrigin-input" type="text" th:field="*{countryOrigin}"/>
+    </div>
+    <div class="row">
+        <label for="description-input">Описание:</label>
+        <input id="description-input" type="text" th:field="*{description}"/>
+    </div>
+    <div class="row">
+        <button type="submit">Обновить</button>
+    </div>
+
+</form>
+</body>
+</html>

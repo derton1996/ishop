@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create sale</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<form id="create-form" th:method="POST" action="#" th:action="@{/sale/new}" th:object="${saleDTO}" enctype="multipart/form-data">
+    <h1>sale info:</h1>
+
+    <div class="row">
+        <label for="title-input">Название:</label>
+        <input id="title-input" type="text" th:field="*{title}"/>
+    </div>
+    <div class="row">
+        <label for="description-input">Описание:</label>
+        <input id="description-input" type="text" th:field="*{description}"/>
+    </div>
+    <div class="form-group">
+        <label for="image">Upload image</label>
+        <input id="image" type="file" name="file"/>
+    </div>
+<!--    <div class="col-sm-8">-->
+<!--&lt;!&ndash;        <form action="/" method="post" th:action="@{/sale/upload}" enctype="multipart/form-data">&ndash;&gt;-->
+
+<!--            <div class="form-group">-->
+<!--                <div class="col-md-2">-->
+<!--                    <label for="image">Upload image</label>-->
+<!--                </div>-->
+<!--                <div class="col-md-8">-->
+<!--                    <input id="image" type="file" name="file"/>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--&lt;!&ndash;            <button type="submit" class="btn btn-default">Submit</button>&ndash;&gt;-->
+<!--&lt;!&ndash;        </form>&ndash;&gt;-->
+<!--    </div>-->
+    <div class="row">
+        <button type="submit">Сохранить</button>
+    </div>
+
+</form>
+</body>
+</html>
