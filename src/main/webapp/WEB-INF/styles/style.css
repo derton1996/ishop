@@ -1,0 +1,36 @@
+html {
+    background: #0fdb5d;
+    background: -webkit-linear-gradient(left, #0fdb5d, #65ec74);
+    background: linear-gradient(to right, #0fdb5d, #65ec74);
+}
+body {
+    background: #1f4ced;
+    margin: 0;
+    height: 130px;
+}
+p {
+    padding: 10px;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+}
+
+input:read-only {
+    background: lightgray;
+}
+
+.menu, .menu td {
+    color: aliceblue;
+    position: relative;
+    top: 50%;
+    border-spacing: 25px;
+    margin-right: 20%;
+    margin-left: 50%;
+}
+
+a {
+    color: aliceblue !important;
+    text-decoration: none
+}
