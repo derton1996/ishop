@@ -98,7 +98,9 @@ public class SaleRepositoryImpl implements SaleRepository{
     }
 
     private Sale merge(Sale dbSale, Sale dtoSale) {
+        dbSale.setTitle(dtoSale.getTitle());
         dbSale.setDescription(dtoSale.getDescription());
+        dbSale.setImage(dtoSale.getImage());
         return dbSale;
     }
 }

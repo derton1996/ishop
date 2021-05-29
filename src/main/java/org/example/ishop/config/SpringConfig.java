@@ -56,13 +56,15 @@ public class SpringConfig implements WebMvcConfigurer {
     }
 
     /**
-     * Конфига для доступа к css
+     * Конфига для доступа к css и изображениям
      * @param registry
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/styles/**")
                 .addResourceLocations("/WEB-INF/styles/");
+        registry.addResourceHandler("/images/sale/**")
+                .addResourceLocations("file:///D:/Programming/IShop/src/main/resources/images/sale/");
     }
 
 }
