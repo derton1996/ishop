@@ -50,12 +50,7 @@ public class SaleController {
 
     @PostMapping("/new")
     public String create(@ModelAttribute("saleDTO") SaleDTO saleDTO, @RequestParam("file") MultipartFile image) {
-        try {
-            saleDTO.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        saleService.save(converter.dtoToEntity(saleDTO));
+        saleService.save(converter.dtoToEntity(saleDTO), image);
         return "redirect:/sale";
     }
 
@@ -69,6 +64,24 @@ public class SaleController {
             e.printStackTrace();
         }
 
+        return "redirect:/sale";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") String id, Model model) {
+        model.addAttribute("saleDTO", converter.entityToDTO(saleService.findById(id)));
+        return "sale/edit";
+    }
+
+    @PostMapping("/edit")
+    public String edit(@ModelAttribute("saleDTO") SaleDTO saleDTO, @RequestParam("file") MultipartFile image) {
+        saleService.update(converter.dtoToEntity(saleDTO), image);
+        return "redirect:/sale";
+    }
+
+    @PostMapping("/delete")
+    public String delete(@RequestParam String id) {
+        saleService.deleteById(id);
         return "redirect:/sale";
     }
 

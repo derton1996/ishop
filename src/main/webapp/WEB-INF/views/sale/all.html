@@ -21,15 +21,17 @@
         <th>Идентификатор</th>
         <th>Изображение</th>
         <th>Название</th>
+        <th>Описание</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="saleDTO : ${saleDTOList}">
         <td th:text="${saleDTO.id}">1</td>
         <td>
-            <img th:attr="src=@{'data:image/png;base64,'+ ${saleDTO.image}}" alt="avatar" height="150" width="150"/>
+            <img th:src="@{${saleDTO.getImage()}}" alt="avatar" height="150" width="150"/>
         </td>
         <td th:text="${saleDTO.title}">title</td>
+        <td th:text="${saleDTO.description}">description</td>
         <td>
             <form id="view-form" th:method="GET" th:action="@{/sale/{id}(id=${saleDTO.id})}">
                 <input type="submit" value="Отобразить"/>
@@ -41,7 +43,7 @@
             </form>
         </td>
         <td>
-            <form id="delete-form" th:method="DELETE" th:action="@{/sale/delete(id=${saleDTO.id})}">
+            <form id="delete-form" th:method="POST" th:action="@{/sale/delete(id=${saleDTO.id})}">
                 <input type="submit" value="Удалить"/>
             </form>
         </td>
