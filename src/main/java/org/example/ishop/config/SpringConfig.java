@@ -1,10 +1,12 @@
 package org.example.ishop.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -16,7 +18,11 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 @Configuration
 @ComponentScan(basePackages = "org.example.ishop")
 @EnableWebMvc
+@PropertySource(value = "classpath:application.properties")
 public class SpringConfig implements WebMvcConfigurer {
+
+    @Value("${images.folder}")
+    public String IMAGES_FOLDER;
 
     private final ApplicationContext applicationContext;
 
@@ -64,7 +70,7 @@ public class SpringConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/styles/**")
                 .addResourceLocations("/WEB-INF/styles/");
         registry.addResourceHandler("/images/sale/**")
-                .addResourceLocations("file:///D:/Programming/IShop/src/main/resources/images/sale/");
+                .addResourceLocations("file:///" + IMAGES_FOLDER + "images/sale/");
     }
 
 }
