@@ -2,18 +2,26 @@ package org.example.ishop.services.sale;
 
 import org.example.ishop.database.sale.SaleRepository;
 import org.example.ishop.entities.Sale;
-import org.example.ishop.utils.PathUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
 @Service
+@PropertySource(value = "classpath:application.properties")
 public class SaleServiceImpl implements SaleService {
+
+    @Value("${images.folder}")
+    public String IMAGES_FOLDER;
 
     private final SaleRepository saleRepository;
 
@@ -44,7 +52,7 @@ public class SaleServiceImpl implements SaleService {
 
     public void update(Sale sale, MultipartFile image) {
         try {
-            Files.deleteIfExists(Paths.get(PathUtils.RESOURCES + saleRepository.findById(sale.getId()).getImage()));
+            Files.deleteIfExists(Paths.get(IMAGES_FOLDER + saleRepository.findById(sale.getId()).getImage()));
             saveImage(sale, image);
             saleRepository.update(sale);
         } catch (IOException e) {
@@ -55,7 +63,7 @@ public class SaleServiceImpl implements SaleService {
     @Override
     public void deleteById(String id) {
         try {
-            Files.deleteIfExists(Paths.get(PathUtils.RESOURCES + saleRepository.findById(id).getImage()));
+            Files.deleteIfExists(Paths.get(IMAGES_FOLDER + saleRepository.findById(id).getImage()));
             saleRepository.deleteById(id);
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,8 +71,10 @@ public class SaleServiceImpl implements SaleService {
     }
 
     private void saveImage(Sale sale, MultipartFile image) throws IOException {
+        File dir = new File(IMAGES_FOLDER + sale.getImage());
+        if (!dir.exists()) dir.mkdirs();
         sale.setImage(sale.getImage() + sale.getId() + "_" + image.getOriginalFilename());
-        File targetFile = new File(PathUtils.RESOURCES + sale.getImage());
+        File targetFile = new File(IMAGES_FOLDER + sale.getImage());
         OutputStream outStream = new FileOutputStream(targetFile);
         byte[] buffer = image.getBytes();
         outStream.write(buffer);
