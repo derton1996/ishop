@@ -3,33 +3,53 @@
 <head>
     <meta charset="UTF-8"/>
     <title>All sales list</title>
+    <link th:href="@{styles/style.css}" rel="stylesheet" type="text/css"/>
     <style type="text/css">
         body {
             padding: 20px;
         }
 
         .sale, .sale td {
-            border: 1px solid lightgray;
-            padding: 7px;
+            margin-top: 10%;
+            margin-left: 15%;
         }
     </style>
 </head>
 <body>
-<table class="sale">
+<table class="menu">
     <thead>
     <tr>
-        <th>Идентификатор</th>
-        <th>Изображение</th>
-        <th>Название</th>
+        <th>
+            <a th:href="@{/product}">Каталог</a>
+        </th>
+        <th>
+            <a th:href="@{/sale}">Акции</a>
+        </th>
+        <!--        <th>-->
+        <!--            <a th:href="@{/sale}">Контакты</a>-->
+        <!--        </th>-->
+        <!--        <th>-->
+        <!--            <a th:href="@{/sale}">Доставка</a>-->
+        <!--        </th>-->
     </tr>
     </thead>
+</table>
+<table class="sale">
     <tbody>
     <tr th:each="saleDTO : ${saleDTOList}">
-        <td th:text="${saleDTO.id}">1</td>
-        <td>
-            <img th:attr="src=@{'data:image/png;base64,'+ ${saleDTO.image}}" alt="avatar" height="150" width="150"/>
+        <td width="400" height="400">
+            <img th:src="@{${saleDTO.getImage()}}" alt="avatar" height="400" width="400"/>
         </td>
-        <td th:text="${saleDTO.title}">title</td>
+        <td width="700" height="400">
+            <table width="700" height="400">
+                <tr>
+                    <td height="70" th:text="${saleDTO.title}">title</td>
+                </tr>
+                <tr>
+                    <td height="330" th:align="top" th:text="${saleDTO.description}">description</td>
+                </tr>
+            </table>
+        </td>
         <td>
             <form id="view-form" th:method="GET" th:action="@{/sale/{id}(id=${saleDTO.id})}">
                 <input type="submit" value="Отобразить"/>
@@ -41,7 +61,7 @@
             </form>
         </td>
         <td>
-            <form id="delete-form" th:method="DELETE" th:action="@{/sale/delete(id=${saleDTO.id})}">
+            <form id="delete-form" th:method="POST" th:action="@{/sale/delete(id=${saleDTO.id})}">
                 <input type="submit" value="Удалить"/>
             </form>
         </td>
