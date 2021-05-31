@@ -7,12 +7,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class SaleConverter implements Converter<Sale, SaleDTO> {
 
+    private static final String SALE_IMAGES_DIRECTORY = "images/sale/";
+
     @Override
     public Sale dtoToEntity(SaleDTO dto) {
         Sale sale = new Sale(dto.getId());
         sale.setTitle(dto.getTitle());
         sale.setDescription(dto.getDescription());
-        sale.setImage(dto.getImage());
+        sale.setImage(SALE_IMAGES_DIRECTORY);
         return sale;
     }
 

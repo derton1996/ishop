@@ -12,6 +12,6 @@ CREATE TABLE SALE
     id    VARCHAR(100) NOT NULL,
     title VARCHAR(60) NOT NULL,
     description varchar(200),
-    image mediumtext,
+    image varchar(255),
     primary key (id)
 );

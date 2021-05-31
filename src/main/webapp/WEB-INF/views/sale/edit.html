@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>View sale</title>
+    <title>Edit sale</title>
     <style type="text/css">
         body {
             padding: 50px;
@@ -23,12 +23,13 @@
     </style>
 </head>
 <body>
-<form id="view-form" th:object="${saleDTO}">
-    <h1>sale info:</h1>
+<form id="edit-form" th:method="POST" th:action="@{/sale/edit}" th:object="${saleDTO}" enctype="multipart/form-data">
+
+    <h1>Product info:</h1>
 
     <div class="row">
         <label for="id-input">Идентификатор:</label>
-        <input id="id-input" type="text" th:field="*{id}"/>
+        <input id="id-input" type="text" readonly="readonly" th:field="*{id}"/>
     </div>
     <div class="row">
         <label for="title-input">Название:</label>
@@ -38,9 +39,15 @@
         <label for="description-input">Описание:</label>
         <input id="description-input" type="text" th:field="*{description}"/>
     </div>
-    <div>
-        <img th:attr="src=@{'data:image/png;base64,'+ ${saleDTO.image}}" alt="avatar" height="150" width="150"/>
+    <img th:src="@{${saleDTO.getImage()}}" alt="avatar" height="400" width="400"/>
+    <div class="form-group">
+        <label for="image">Upload image</label>
+        <input id="image" type="file" name="file"/>
     </div>
+    <div class="row">
+        <button type="submit">Обновить</button>
+    </div>
+
 </form>
 </body>
 </html>
