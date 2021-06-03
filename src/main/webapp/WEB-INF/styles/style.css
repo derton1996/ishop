@@ -1,13 +1,13 @@
 html {
-    background: #0fdb5d;
-    background: -webkit-linear-gradient(left, #0fdb5d, #65ec74);
-    background: linear-gradient(to right, #0fdb5d, #65ec74);
+    background: #faf9e6;
 }
+
 body {
-    background: #1f4ced;
+    background: #202020;
     margin: 0;
     height: 130px;
 }
+
 p {
     padding: 10px;
 }
@@ -21,13 +21,21 @@ input:read-only {
     background: lightgray;
 }
 
-.menu, .menu td {
-    color: aliceblue;
+.menu,
+.menu table {
+    height: 130px;
+    margin-left: 40%;
     position: relative;
-    top: 50%;
-    border-spacing: 25px;
-    margin-right: 20%;
-    margin-left: 50%;
+    width: 12%; /* Ширина таблицы */
+    /*border: 1px solid #399; !* Граница вокруг таблицы *!*/
+    border-spacing: 7px 5px; /* Расстояние между границ */
+    top: 55%;
+}
+
+.menu td {
+    /*border: 1px solid red;*/
+    border-spacing: 40px;
+    color: aliceblue;
 }
 
 a {
