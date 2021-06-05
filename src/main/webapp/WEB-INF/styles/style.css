@@ -38,7 +38,7 @@ input:read-only {
     color: aliceblue;
 }
 
-a {
+.menu a {
     color: aliceblue !important;
     text-decoration: none
 }
