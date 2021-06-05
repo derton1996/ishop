@@ -1,18 +1,18 @@
 package org.example.ishop.database.product;
 
-import org.example.ishop.entities.Product;
+import org.example.ishop.entities.StrandElectro;
 
 import java.util.List;
 
 public interface ProductRepository {
 
-    Product findById(String id);
+    StrandElectro findById(String id);
 
-    List<Product> findAll();
+    List<StrandElectro> findAll();
 
-    void save(Product product);
+    void save(StrandElectro strandElectro);
 
-    void update(Product product);
+    void update(StrandElectro strandElectro);
 
     void deleteById(String id);
 

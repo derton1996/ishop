@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SaleConverter implements Converter<Sale, SaleDTO> {
 
-    private static final String SALE_IMAGES_DIRECTORY = "images/sale/";
+    private static final String SALE_IMAGES_DIRECTORY = "/images/sale/";
 
     @Override
     public Sale dtoToEntity(SaleDTO dto) {

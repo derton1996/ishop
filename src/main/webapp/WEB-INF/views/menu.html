@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8"/>
-    <title>Create product</title>
+    <title>Domain page</title>
     <link th:href="@{styles/style.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{styles/drop.css}" rel="stylesheet" type="text/css"/>
 </head>
@@ -12,24 +12,18 @@
     <thead>
     <tr>
         <td>
-            <a th:href="@{/product}">Каталог</a>
+            <a th:href="@{/strand/electro}">Каталог</a>
         </td>
         <td>
             <a th:href="@{/sale}">Акции</a>
         </td>
-<!--        <th>-->
-<!--            <a th:href="@{/sale}">Контакты</a>-->
-<!--        </th>-->
-<!--        <th>-->
-<!--            <a th:href="@{/sale}">Доставка</a>-->
-<!--        </th>-->
     </tr>
     </thead>
 </table>
 <ul class="drop_vert_menu">
     <li><a href="#"><span>Струны</span></a>
         <ul>
-            <li><a href="#"><span>Для электрогитары</span></a></li>
+            <li><a th:href="@{/strand/electro}"><span>Для электрогитары</span></a></li>
             <li><a href="#"><span>Для акустической гитары</span></a></li>
         </ul>
     </li>
