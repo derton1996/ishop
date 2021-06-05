@@ -1,12 +1,13 @@
 package org.example.ishop.database.product;
 
-import org.example.ishop.entities.Product;
+import org.example.ishop.entities.StrandElectro;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class ProductRepositoryImpl implements ProductRepository{
@@ -19,13 +20,13 @@ public class ProductRepositoryImpl implements ProductRepository{
     }
 
     @Override
-    public Product findById(String id) {
+    public StrandElectro findById(String id) {
         Session session = sessionFactory.getCurrentSession();
         try {
             session.beginTransaction();
-            Product product = session.get(Product.class, id);
+            StrandElectro strandElectro = session.get(StrandElectro.class, id);
             session.getTransaction().commit();
-            return product;
+            return strandElectro;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -35,13 +36,13 @@ public class ProductRepositoryImpl implements ProductRepository{
     }
 
     @Override
-    public List<Product> findAll() {
+    public List<StrandElectro> findAll() {
         Session session = sessionFactory.getCurrentSession();
         try {
             session.beginTransaction();
-            List<Product> productList = session.createQuery("from Product").getResultList();
+            List<StrandElectro> strandElectroList = session.createQuery("from StrandElectro").getResultList();
             session.getTransaction().commit();
-            return productList;
+            return strandElectroList;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -51,11 +52,11 @@ public class ProductRepositoryImpl implements ProductRepository{
     }
 
     @Override
-    public void save(Product product) {
+    public void save(StrandElectro strandElectro) {
         Session session = sessionFactory.getCurrentSession();
         try {
             session.beginTransaction();
-            session.save(product);
+            session.save(strandElectro);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,12 +66,12 @@ public class ProductRepositoryImpl implements ProductRepository{
     }
 
     @Override
-    public void update(Product product) {
+    public void update(StrandElectro strandElectro) {
         Session session = sessionFactory.getCurrentSession();
         try {
             session.beginTransaction();
-            Product dbProduct = session.get(Product.class, product.getId());
-            merge(dbProduct, product);
+            StrandElectro dbStrandElectro = session.get(StrandElectro.class, strandElectro.getId());
+            merge(dbStrandElectro, strandElectro);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,8 +87,8 @@ public class ProductRepositoryImpl implements ProductRepository{
         Session session = sessionFactory.getCurrentSession();
         try {
             session.beginTransaction();
-            Product product = session.get(Product.class, id);
-            session.delete(product);
+            StrandElectro strandElectro = session.get(StrandElectro.class, id);
+            session.delete(strandElectro);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,10 +97,13 @@ public class ProductRepositoryImpl implements ProductRepository{
         }
     }
 
-    private Product merge(Product dbProduct, Product dtoProduct) {
-        dbProduct.setGauge(dtoProduct.getGauge());
-        dbProduct.setCountryOrigin(dtoProduct.getCountryOrigin());
-        dbProduct.setDescription(dtoProduct.getDescription());
-        return dbProduct;
+    private StrandElectro merge(StrandElectro entity, StrandElectro dto) {
+        entity.setTitle(dto.getTitle());
+        entity.setPrice(dto.getPrice());
+        entity.setGauge(dto.getGauge());
+        entity.setCountryOrigin(dto.getCountryOrigin());
+        entity.setDescription(dto.getDescription());
+        entity.setImage(dto.getImage());
+        return entity;
     }
 }

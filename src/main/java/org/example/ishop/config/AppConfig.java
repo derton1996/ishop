@@ -1,6 +1,6 @@
 package org.example.ishop.config;
 
-import org.example.ishop.entities.Product;
+import org.example.ishop.entities.StrandElectro;
 import org.example.ishop.entities.Sale;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +20,7 @@ public class AppConfig {
     public SessionFactory sessionFactory() {
         return new org.hibernate.cfg.Configuration()
                 .configure("hibernate/hibernate.cfg.xml")
-                .addAnnotatedClass(Product.class)
+                .addAnnotatedClass(StrandElectro.class)
                 .addAnnotatedClass(Sale.class)
                 .buildSessionFactory();
     }

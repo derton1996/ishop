@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Edit product</title>
+    <title>Edit strandElectro</title>
     <style type="text/css">
         body {
             padding: 50px;
@@ -23,13 +23,25 @@
     </style>
 </head>
 <body>
-<form id="edit-form" th:method="PATCH" th:action="@{/product/edit}" th:object="${productDTO}">
+<form id="edit-form" th:method="POST" th:action="@{/strand/electro/edit}" th:object="${strandElectro}" enctype="multipart/form-data">
 
     <h1>Product info:</h1>
 
     <div class="row">
         <label for="id-input">Идентификатор:</label>
         <input id="id-input" type="text" readonly="readonly" th:field="*{id}"/>
+    </div>
+    <div class="row">
+        <label for="title-input">Наименование:</label>
+        <input id="title-input" type="text" th:field="*{title}"/>
+    </div>
+    <div class="row">
+        <label for="description-input">Описание:</label>
+        <input id="description-input" type="text" th:field="*{description}"/>
+    </div>
+    <div class="row">
+        <label for="price-input">Цена:</label>
+        <input id="price-input" type="text" th:field="*{price}"/>
     </div>
     <div class="row">
         <label for="gauge-input">Калибр:</label>
@@ -39,9 +51,10 @@
         <label for="countryOrigin-input">Страна производства:</label>
         <input id="countryOrigin-input" type="text" th:field="*{countryOrigin}"/>
     </div>
-    <div class="row">
-        <label for="description-input">Описание:</label>
-        <input id="description-input" type="text" th:field="*{description}"/>
+    <img th:src="@{${strandElectro.image}}" alt="avatar" height="200" width="200"/>
+    <div class="form-group">
+        <label for="image">Upload image</label>
+        <input id="image" type="file" name="file"/>
     </div>
     <div class="row">
         <button type="submit">Обновить</button>
