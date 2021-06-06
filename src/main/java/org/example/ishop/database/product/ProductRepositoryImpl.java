@@ -100,6 +100,7 @@ public class ProductRepositoryImpl implements ProductRepository{
     private StrandElectro merge(StrandElectro entity, StrandElectro dto) {
         entity.setTitle(dto.getTitle());
         entity.setPrice(dto.getPrice());
+        entity.setBrand(dto.getBrand());
         entity.setGauge(dto.getGauge());
         entity.setCountryOrigin(dto.getCountryOrigin());
         entity.setDescription(dto.getDescription());

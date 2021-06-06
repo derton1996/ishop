@@ -4,12 +4,23 @@
     <meta charset="UTF-8"/>
     <title>All products list</title>
     <link th:href="@{styles/style.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{styles/filter.css}" rel="stylesheet" type="text/css">
     <link th:href="@{styles/drop.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{styles/product.css}" rel="stylesheet" type="text/css">
     <style type="text/css">
         .adn, .adn a {
             margin-top: 20px;
             margin-left: 200px;
+        }
+
+        .mp, .mp table {
+            margin-top: 150px;
+            margin-left: 50px;
+            border: 1px solid black;
+        }
+
+        .mp td {
+            border: 1px solid black;
         }
     </style>
 </head>
@@ -26,67 +37,141 @@
     </tr>
     </thead>
 </table>
-<ul class="drop_vert_menu">
-    <li><a href="#"><span>Струны</span></a>
-        <ul>
-            <li><a th:href="@{/strand/electro}"><span>Для электрогитары</span></a></li>
-            <li><a href="#"><span>Для акустической гитары</span></a></li>
-        </ul>
-    </li>
-    <li><a href="#"><span>Музыкальные инструменты</span></a>
-        <ul>
-            <li><a href="#"><span>Гитары</span></a></li>
-            <li><a href="#"><span>Бас-гитары</span></a></li>
-            <li><a href="#"><span>Микрофоны</span></a></li>
-        </ul>
-    </li>
-    <li><a href="#"><span>Аксессуары</span></a>
-        <ul>
-            <li><a href="#"><span>Тюнеры</span></a></li>
-            <li><a href="#"><span>Метрономы</span></a></li>
-        </ul>
-    </li>
-</ul>
-<table class="product">
-    <tbody>
-    <tr th:each="strandElectro : ${strandElectroList}">
-        <td th:width="200" th:height="200">
-            <img th:src="@{${strandElectro.image}}" alt="avatar" height="200" width="200"/>
+<script>
+    function myFunction(contentId) {
+        document.getElementById(contentId).classList.toggle("show");
+    }
+
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+<table class="mp">
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <div class="dropdown">
+                            <button class="dropbtn" onclick="myFunction('myDropdown1')">Dropdown</button>
+                            <div id="myDropdown1" class="dropdown-content">
+                                <a href="#">Link 1</a>
+                                <a href="#">Link 2</a>
+                                <a href="#">Link 3</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="dropdown">
+                            <button class="dropbtn" onclick="myFunction('myDropdown2')">Dropdown2</button>
+                            <div id="myDropdown2" class="dropdown-content">
+                                <a href="#">Link 4</a>
+                                <a href="#">Link 5</a>
+                                <a href="#">Link 6</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </td>
+    </tr>
+    <tr>
+        <td>
+            <ul class="drop_vert_menu">
+                <li><a href="#"><span>Струны</span></a>
+                    <ul>
+                        <li><a th:href="@{/strand/electro}"><span>Для электрогитары</span></a></li>
+                        <li><a href="#"><span>Для акустической гитары</span></a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><span>Музыкальные инструменты</span></a>
+                    <ul>
+                        <li><a href="#"><span>Гитары</span></a></li>
+                        <li><a href="#"><span>Бас-гитары</span></a></li>
+                        <li><a href="#"><span>Микрофоны</span></a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><span>Аксессуары</span></a>
+                    <ul>
+                        <li><a href="#"><span>Тюнеры</span></a></li>
+                        <li><a href="#"><span>Метрономы</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+<table class="product">
+    <tr th:each="strandElectro : ${strandElectroList}">
+        <td th:width="200" th:height="200"><img th:src="@{${strandElectro.image}}" alt="avatar" height="200"
+                                                width="200"/></td>
         <td width="600" height="200">
             <table width="600" height="200">
-                <tr><td height="100" th:text="${strandElectro.title}">title</td></tr>
-                <tr><td height="100" th:align="top" th:text="${strandElectro.description}">description</td></tr>
+                <tr>
+                    <td height="100" th:text="${strandElectro.title}">title</td>
+                </tr>
+                <tr>
+                    <td height="100" th:align="top" th:text="${strandElectro.description}">description</td>
+                </tr>
             </table>
         </td>
         <td>
             <table width="100">
-                <tr><td height="50" th:text="${strandElectro.price}">1000</td></tr>
-                <tr><td height="50">Добавить</td></tr>
-                <tr><td height="100">Корзина</td></tr>
+                <tr>
+                    <td height="50" th:text="${strandElectro.price}">1000</td>
+                </tr>
+                <tr>
+                    <td height="50">Добавить</td>
+                </tr>
+                <tr>
+                    <td height="100">Корзина</td>
+                </tr>
             </table>
         </td>
         <td>
             <table>
-                <tr><td>
-                        <form id="view-form" th:method="GET" th:action="@{/strand/electro/{id}(id=${strandElectro.id})}">
+                <tr>
+                    <td>
+                        <form id="view-form" th:method="GET"
+                              th:action="@{/strand/electro/{id}(id=${strandElectro.id})}">
                             <input type="submit" value="Отобразить"/>
                         </form>
-                </td></tr>
-                <tr><td>
-                    <form id="edit-form" th:method="GET" th:action="@{/strand/electro/edit/{id}(id=${strandElectro.id})}">
-                        <input type="submit" value="Редактировать"/>
-                    </form>
-                </td></tr>
-                <tr><td>
-                    <form id="delete-form" th:method="DELETE" th:action="@{/strand/electro/{id}(id=${strandElectro.id})}">
-                        <input type="submit" value="Удалить"/>
-                    </form>
-                </td></tr>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form id="edit-form" th:method="GET"
+                              th:action="@{/strand/electro/edit/{id}(id=${strandElectro.id})}">
+                            <input type="submit" value="Редактировать"/>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form id="delete-form" th:method="DELETE"
+                              th:action="@{/strand/electro/{id}(id=${strandElectro.id})}">
+                            <input type="submit" value="Удалить"/>
+                        </form>
+                    </td>
+                </tr>
             </table>
     </tr>
-    </tbody>
 </table>
+
 <div class="adn">
     <a th:href="@{/strand/electro/new}">Добавить</a>
 </div>
