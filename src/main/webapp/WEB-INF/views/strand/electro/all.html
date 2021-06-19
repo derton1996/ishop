@@ -7,10 +7,11 @@
     <link th:href="@{styles/filter.css}" rel="stylesheet" type="text/css">
     <link th:href="@{styles/drop.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{styles/product.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{styles/horiz.css}" rel="stylesheet" type="text/css">
     <style type="text/css">
-        .adn, .adn a {
-            margin-top: 20px;
-            margin-left: 200px;
+        .adn {
+            margin-top: 700px;
+            margin-left: -100px;
         }
 
         .mp, .mp table {
@@ -20,7 +21,20 @@
         }
 
         .mp td {
+            vertical-align: top;
             border: 1px solid black;
+        }
+
+        .dd {
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        .dd a {
+            color: black;
+            padding: 10px 0px 10px 10px;
         }
     </style>
 </head>
@@ -37,63 +51,43 @@
     </tr>
     </thead>
 </table>
-<script>
-    function myFunction(contentId) {
-        document.getElementById(contentId).classList.toggle("show");
-    }
 
-    // Close the dropdown menu if the user clicks outside of it
-    window.onclick = function (event) {
-        if (!event.target.matches('.dropbtn')) {
-
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
-        }
-    }
-</script>
-<table class="mp">
-    <tr>
-        <td>
-            <table>
-                <tr>
-                    <td>
-                        <div class="dropdown">
-                            <button class="dropbtn" onclick="myFunction('myDropdown1')">Dropdown</button>
-                            <div id="myDropdown1" class="dropdown-content">
-                                <a href="#">Link 1</a>
-                                <a href="#">Link 2</a>
-                                <a href="#">Link 3</a>
+<div class="wrap">
+    <div class="bblock">
+        <form id="filter-form" th:method="GET" th:action="@{/strand/electro/filter}" th:object="${filter}">
+            <div>
+                <div class="dd">
+                    <div class="dropdown">
+                        <button class="dropbtn" type="button" onclick="myFunction('myDropdown1')">Цена</button>
+                        <div id="myDropdown1" class="dropdown-content">
+                            <div class="fblock">
+                                <label for="price-from-input">от</label>
+                                <input id="price-from-input" th:field="*{priceFrom}" type="number"/>
+                            </div>
+                            <div class="fblock">
+                                <label for="price-to-input">до</label>
+                                <input id="price-to-input" th:field="*{priceTo}" type="number"/>
                             </div>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="dropdown">
-                            <button class="dropbtn" onclick="myFunction('myDropdown2')">Dropdown2</button>
-                            <div id="myDropdown2" class="dropdown-content">
-                                <a href="#">Link 4</a>
-                                <a href="#">Link 5</a>
-                                <a href="#">Link 6</a>
-                            </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropbtn" type="button" onclick="myFunction('myDropdown2')">Бренд</button>
+                        <div id="myDropdown2" class="dropdown-content">
+                            <label for="brand-input">бренд</label>
+                            <input id="brand-input" th:field="*{brand}" type="text"/>
                         </div>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td>
+                    </div>
+                </div>
+                <div id="sub">
+                    <button type="submit">Фильтровать</button>
+                </div>
+            </div>
+        </form>
+        <div>
             <ul class="drop_vert_menu">
                 <li><a href="#"><span>Струны</span></a>
                     <ul>
-                        <li><a th:href="@{/strand/electro}"><span>Для электрогитары</span></a></li>
+                        <li><a href="#"><span>Для электрогитары</span></a></li>
                         <li><a href="#"><span>Для акустической гитары</span></a></li>
                     </ul>
                 </li>
@@ -111,66 +105,73 @@
                     </ul>
                 </li>
             </ul>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+    <div class="bblock">
+        <table class="product">
+            <tr th:each="strandElectro : ${strandElectroList}">
+                <td th:width="200" th:height="200"><img th:src="@{${strandElectro.image}}" alt="avatar" height="200"
+                                                        width="200"/></td>
+                <td width="600" height="200">
+                    <table width="600" height="200">
+                        <tr>
+                            <td height="100" th:text="${strandElectro.title}">title</td>
+                        </tr>
+                        <tr>
+                            <td height="100" th:align="top" th:text="${strandElectro.description}">description</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table width="100">
+                        <tr>
+                            <td height="50" th:text="${strandElectro.price}">1000</td>
+                        </tr>
+                        <tr>
+                            <td height="50">Добавить</td>
+                        </tr>
+                        <tr>
+                            <td height="100">Корзина</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <form id="view-form" th:method="GET"
+                                      th:action="@{/strand/electro/{id}(id=${strandElectro.id})}">
+                                    <input type="submit" value="Отобразить"/>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form id="edit-form" th:method="GET"
+                                      th:action="@{/strand/electro/edit/{id}(id=${strandElectro.id})}">
+                                    <input type="submit" value="Редактировать"/>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form id="delete-form" th:method="DELETE"
+                                      th:action="@{/strand/electro/{id}(id=${strandElectro.id})}">
+                                    <input type="submit" value="Удалить"/>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+            </tr>
+        </table>
+    </div>
+</div>
 
-<table class="product">
-    <tr th:each="strandElectro : ${strandElectroList}">
-        <td th:width="200" th:height="200"><img th:src="@{${strandElectro.image}}" alt="avatar" height="200"
-                                                width="200"/></td>
-        <td width="600" height="200">
-            <table width="600" height="200">
-                <tr>
-                    <td height="100" th:text="${strandElectro.title}">title</td>
-                </tr>
-                <tr>
-                    <td height="100" th:align="top" th:text="${strandElectro.description}">description</td>
-                </tr>
-            </table>
-        </td>
-        <td>
-            <table width="100">
-                <tr>
-                    <td height="50" th:text="${strandElectro.price}">1000</td>
-                </tr>
-                <tr>
-                    <td height="50">Добавить</td>
-                </tr>
-                <tr>
-                    <td height="100">Корзина</td>
-                </tr>
-            </table>
-        </td>
-        <td>
-            <table>
-                <tr>
-                    <td>
-                        <form id="view-form" th:method="GET"
-                              th:action="@{/strand/electro/{id}(id=${strandElectro.id})}">
-                            <input type="submit" value="Отобразить"/>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <form id="edit-form" th:method="GET"
-                              th:action="@{/strand/electro/edit/{id}(id=${strandElectro.id})}">
-                            <input type="submit" value="Редактировать"/>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <form id="delete-form" th:method="DELETE"
-                              th:action="@{/strand/electro/{id}(id=${strandElectro.id})}">
-                            <input type="submit" value="Удалить"/>
-                        </form>
-                    </td>
-                </tr>
-            </table>
-    </tr>
-</table>
+<script>
+    function myFunction(contentId) {
+        document.getElementById(contentId).classList.toggle("show");
+    }
+</script>
 
 <div class="adn">
     <a th:href="@{/strand/electro/new}">Добавить</a>

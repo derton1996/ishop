@@ -1,5 +1,10 @@
 .product, .product td {
+    left: 65px;
     border: 1px solid blue;
-    margin-top: -150px;
-    margin-left: 350px;
+    /*margin-top: -150px;*/
+    /*margin-left: 350px;*/
+}
+
+.product tr {
+    margin-bottom: 50px;
 }
