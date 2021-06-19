@@ -1,0 +1,28 @@
+.wrap {
+    margin-left: -20px;
+    margin-top: 200px;
+    /*width: 1310px;!*фиксируем ширину обертки*!*/
+    /*margin: 0 auto;!*центрируем ее*!*/
+    /*background: darkgray;*/
+    /*height: 120px;!*Задаем высоту обертки*!*/
+}
+
+.bblock {
+    float: left; /*Задаем обтекание*/
+    /*margin-top: 200px;*/
+    /*line-height: 120px;!*Высота строки +  верт. центрирования текста*!*/
+    /*font-size: 40px;*/
+    /*background: dodgerblue;*/
+    /*color: white;*/
+    /*width: 320px; !*Фиксируем ширину блока*!*/
+    margin-left: 140px;
+    text-align: center; /*Центрируем текст по горизонтали*/
+}
+
+.fblock {
+    float: left;
+}
+
+/*.wrap :last-child {*/
+/*    margin-right: 0px;!*Убираем поле последнего div-а*!*/
+/*}*/

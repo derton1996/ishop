@@ -18,7 +18,10 @@ public class StrandElectro extends BaseEntity {
     private String title;
 
     @Column(name = "price")
-    private String price;
+    private int price;
+
+    @Column(name = "brand")
+    private String brand;
 
     @Column(name = "gauge")
     private String gauge;
@@ -62,12 +65,20 @@ public class StrandElectro extends BaseEntity {
         this.title = title;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public String getGauge() {
@@ -107,7 +118,8 @@ public class StrandElectro extends BaseEntity {
         return "StrandElectro{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
-                ", price='" + price + '\'' +
+                ", price=" + price +
+                ", brand='" + brand + '\'' +
                 ", gauge='" + gauge + '\'' +
                 ", countryOrigin='" + countryOrigin + '\'' +
                 ", description='" + description + '\'' +

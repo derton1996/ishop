@@ -1,5 +1,6 @@
 package org.example.ishop.controllers.strand;
 
+import org.example.ishop.dto.FilterStrandDTO;
 import org.example.ishop.entities.StrandElectro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,6 +61,13 @@ public class StrandElectroController {
     @GetMapping
     public String findAll(Model model) {
         model.addAttribute("strandElectroList", electroStrandService.findAll());
+        model.addAttribute("filter", new FilterStrandDTO());
+        return "strand/electro/all";
+    }
+
+    @GetMapping("/filter")
+    String filter(@ModelAttribute("filter") FilterStrandDTO filter) {
+
         return "strand/electro/all";
     }
 
