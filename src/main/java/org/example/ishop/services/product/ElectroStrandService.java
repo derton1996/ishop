@@ -1,5 +1,6 @@
 package org.example.ishop.services.product;
 
+import org.example.ishop.dto.FilterStrandDTO;
 import org.example.ishop.entities.StrandElectro;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,5 +17,7 @@ public interface ElectroStrandService {
     void update(StrandElectro strandElectro, MultipartFile image);
 
     void deleteById(String id);
+
+    List<StrandElectro> filter(FilterStrandDTO filter);
 
 }

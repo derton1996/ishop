@@ -1,6 +1,7 @@
 package org.example.ishop.services.product;
 
 import org.example.ishop.database.product.ProductRepository;
+import org.example.ishop.dto.FilterStrandDTO;
 import org.example.ishop.entities.Sale;
 import org.example.ishop.entities.StrandElectro;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,11 @@ public class ElectroStrandServiceImpl implements ElectroStrandService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<StrandElectro> filter(FilterStrandDTO filter) {
+        return productRepository.filter(filter);
     }
 
     private void saveImage(StrandElectro strandElectro, MultipartFile image) throws IOException {
