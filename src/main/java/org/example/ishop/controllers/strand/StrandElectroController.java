@@ -1,5 +1,6 @@
 package org.example.ishop.controllers.strand;
 
+import org.example.ishop.common.StrandBrand;
 import org.example.ishop.dto.FilterStrandDTO;
 import org.example.ishop.entities.StrandElectro;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,7 @@ public class StrandElectroController {
     public String findAll(Model model) {
         model.addAttribute("strandElectroList", electroStrandService.findAll());
         model.addAttribute("filter", new FilterStrandDTO());
+        model.addAttribute("brands", StrandBrand.getAllBrands());
         return "strand/electro/all";
     }
 
