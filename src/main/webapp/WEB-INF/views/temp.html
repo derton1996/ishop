@@ -16,7 +16,7 @@
     </div>
     <br>
     <div>
-        <button type="submit" onclick="fill()">Добавить</button>
+        <button type="submit">Добавить</button>
     </div>
 </form>
 <script>
@@ -27,21 +27,12 @@
         var inp = document.getElementById("content");
         var art = document.getElementById("article");
         var newInp = inp.cloneNode(true);
-        newInp.id = newInp.id + id++;
+        newInp.id = newInp.id + id;
+        newInp.name = 'constructorDTOList[' + `${id}` + '].info';
+        id++;
         art.appendChild(newInp);
         var br = document.createElement("br");
         art.appendChild(br);
-    }
-
-    let dd = 0;
-    function fill() {
-        length = document.getElementsByClassName('hd').length;
-        for (let i = 0; i < length; i++) {
-            let doc = document.getElementsByClassName('hd')[i];
-            let newF = '$' + '{resultDTO.constructorDTOList[' + `${dd++}` + '].info}';
-            console.log(newF);
-            doc.setAttribute("th:field", newF);
-        }
     }
 
 
