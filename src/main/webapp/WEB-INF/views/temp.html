@@ -27,12 +27,26 @@
         var inp = document.getElementById("content");
         var art = document.getElementById("article");
         var newInp = inp.cloneNode(true);
+
+        var obj = new Object();
+        obj.info = 'constructorDTOList[' + `${id}` + '].info';
+        obj.clazz = 'randClass';
         newInp.id = newInp.id + id;
-        newInp.name = 'constructorDTOList[' + `${id}` + '].info';
+        newInp.name = obj;
         id++;
         art.appendChild(newInp);
         var br = document.createElement("br");
         art.appendChild(br);
+    }
+
+    let dd = 0;
+    function fill() {
+        length = document.getElementsByClassName('hd').length;
+        for (let i = 0; i < length; i++) {
+            let doc = document.getElementsByClassName('hd')[i];
+            let newF = 'constructorDTOList[' + `${dd++}` + ']';
+            console.log(newF);
+        }
     }
 
 

@@ -16,14 +16,14 @@ import javax.servlet.MultipartConfigElement;
 @ComponentScan(basePackages = "org.example.ishop")
 public class AppConfig {
 
-    @Bean
-    public SessionFactory sessionFactory() {
-        return new org.hibernate.cfg.Configuration()
-                .configure("hibernate/hibernate.cfg.xml")
-                .addAnnotatedClass(StrandElectro.class)
-                .addAnnotatedClass(Sale.class)
-                .buildSessionFactory();
-    }
+//    @Bean
+//    public SessionFactory sessionFactory() {
+//        return new org.hibernate.cfg.Configuration()
+//                .configure("hibernate/hibernate.cfg.xml")
+//                .addAnnotatedClass(StrandElectro.class)
+//                .addAnnotatedClass(Sale.class)
+//                .buildSessionFactory();
+//    }
 
     @Bean
     public MultipartConfigElement multipartConfigElement() {
