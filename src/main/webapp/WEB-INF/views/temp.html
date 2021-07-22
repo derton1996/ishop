@@ -8,9 +8,9 @@
     <title>Document</title>
 </head>
 <body>
-<form id="form" method="post" th:action="@{/temp/create}" th:object="${resultDTO}">
+<form id="form">
     <div id="article">
-        <input id="content" class="hd" type="text" th:field="${resultDTO.constructorDTOList[0].info}"/>
+        <input id="content" class="hd" type="text"/>
         <button type="button" onclick="createDiv()">+</button>
         <br>
     </div>
@@ -20,6 +20,7 @@
     </div>
 </form>
 <script>
+    const elForm = document.getElementById('form');
 
     let id = 1;
 
@@ -28,26 +29,47 @@
         var art = document.getElementById("article");
         var newInp = inp.cloneNode(true);
 
-        var obj = new Object();
-        obj.info = 'constructorDTOList[' + `${id}` + '].info';
-        obj.clazz = 'randClass';
         newInp.id = newInp.id + id;
-        newInp.name = obj;
+        newInp.name = 'constructorDTOList[' + `${id}` + '].info';
+
         id++;
         art.appendChild(newInp);
         var br = document.createElement("br");
         art.appendChild(br);
     }
 
-    let dd = 0;
-    function fill() {
+    function sendForm() {
+
         length = document.getElementsByClassName('hd').length;
+
+        var ar = [];
         for (let i = 0; i < length; i++) {
             let doc = document.getElementsByClassName('hd')[i];
-            let newF = 'constructorDTOList[' + `${dd++}` + ']';
-            console.log(newF);
+            let obj = new Object();
+            obj.info = doc.value;
+            obj.clazz = "someClazz";
+            ar.push(obj);
         }
+        console.log(ar);
+
+        const formData = JSON.stringify(ar);
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', "http://localhost:8080/temp/create");
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState !== 4 || xhr.status !== 200) {
+                console.log("1")
+                return;
+            }
+            console.log("2");
+        }
+        xhr.send(formData);
     }
+
+    elForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        sendForm();
+    });
 
 
 </script>
