@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form id="form" method="post" th:action="@{/temp/create}" th:object="${resultDTO}">
+    <div id="article">
+        <input id="content" class="hd" type="text" th:field="${resultDTO.constructorDTOList[0].info}"/>
+        <button type="button" onclick="createDiv()">+</button>
+        <br>
+    </div>
+    <br>
+    <div>
+        <button type="submit" onclick="fill()">Добавить</button>
+    </div>
+</form>
+<script>
+
+    let id = 1;
+
+    function createDiv() {
+        var inp = document.getElementById("content");
+        var art = document.getElementById("article");
+        var newInp = inp.cloneNode(true);
+        newInp.id = newInp.id + id++;
+        art.appendChild(newInp);
+        var br = document.createElement("br");
+        art.appendChild(br);
+    }
+
+    let dd = 0;
+    function fill() {
+        length = document.getElementsByClassName('hd').length;
+        for (let i = 0; i < length; i++) {
+            let doc = document.getElementsByClassName('hd')[i];
+            let newF = '$' + '{resultDTO.constructorDTOList[' + `${dd++}` + '].info}';
+            console.log(newF);
+            doc.setAttribute("th:field", newF);
+        }
+    }
+
+
+</script>
+</body>
+</html>
