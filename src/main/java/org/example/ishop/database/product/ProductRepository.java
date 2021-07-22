@@ -1,5 +1,6 @@
 package org.example.ishop.database.product;
 
+import org.example.ishop.dto.FilterStrandDTO;
 import org.example.ishop.entities.StrandElectro;
 
 import java.util.List;
@@ -15,5 +16,7 @@ public interface ProductRepository {
     void update(StrandElectro strandElectro);
 
     void deleteById(String id);
+
+    List<StrandElectro> filter(FilterStrandDTO filter);
 
 }

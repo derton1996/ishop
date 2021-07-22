@@ -68,8 +68,8 @@ public class StrandElectroController {
     }
 
     @GetMapping("/filter")
-    String filter(@ModelAttribute("filter") FilterStrandDTO filter) {
-
+    String filter(Model model, @ModelAttribute("filter") FilterStrandDTO filter) {
+        model.addAttribute("strandElectroList", electroStrandService.filter(filter));
         return "strand/electro/all";
     }
 

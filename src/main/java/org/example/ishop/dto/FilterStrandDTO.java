@@ -2,23 +2,23 @@ package org.example.ishop.dto;
 
 public class FilterStrandDTO {
 
-    private int priceFrom;
-    private int priceTo;
+    private String priceFrom;
+    private String priceTo;
     private String brand;
 
-    public int getPriceFrom() {
+    public String getPriceFrom() {
         return priceFrom;
     }
 
-    public void setPriceFrom(int priceFrom) {
+    public void setPriceFrom(String priceFrom) {
         this.priceFrom = priceFrom;
     }
 
-    public int getPriceTo() {
+    public String getPriceTo() {
         return priceTo;
     }
 
-    public void setPriceTo(int priceTo) {
+    public void setPriceTo(String priceTo) {
         this.priceTo = priceTo;
     }
 
